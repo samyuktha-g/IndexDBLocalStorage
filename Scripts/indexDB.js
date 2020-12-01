@@ -11,7 +11,7 @@ document.getElementById("btn").addEventListener('click', async() => {
     const file = await fileHandle.getFile();
     const contents = await file.text();
     console.log("contents: ", contents);
-    document.getElementById("here").textContent = contents;
+    document.getElementById("here").innerText = contents;
     // or below code can also wok for file reading.
     // document.getElementById('btn2')
     //     .addEventListener('change', function() {
@@ -47,11 +47,11 @@ function CreateFile() {
 //**********************************  Writes a File   ****************************************************** */
 
 
-
+//Upon clicking on the WriteFile button creates a table in indexedDB with table name as TExtEditorDB
 function writeFile() {
     if (!'indexedDB' in window) {
         console.log(" your browser doesnt support indexDB");
-        return;
+        // return;
     }
     const databaseName = "TextEditorDB";
     const DBname = window.indexedDB.open(databaseName);
@@ -66,31 +66,31 @@ function writeFile() {
             console.log("Data is successfully loaded");
         }
     }
-
-    //Local Storage which deletes/clears the text entered by user
-    area.value = localStorage.getItem('area');
-    area.oninput = () => {
-        localStorage.setItem('area', area.value)
-    };
-
-    // document.querySelector("#FileInput").addEventListener("change", function() {
-    //     const reader = new FileReader();
-
-    //     reader.addEventListener("load", () => {
-    //         console.log(load, reader.result);
-    //         localStorage.setItem("this-file", reader.result);
-    //     });
-    //     console.log("file: ", this.file[0]);
-    //     reader.readAsDataURL(this.file[0]);
-    // });
-    // document.addEventListener("DOMContentLoaded", () => {
-    //     const recentImageUrl = localStorage.getItem("this-file");
-    //     console.log("recent", recentImageUrl);
-    // })
-
-    //}
-
-    // var butOpenFile = document.getElementById("btn");
-    document.getElementById("btn2").addEventListener("click", CreateFile); //Update
-    document.getElementById("btn3").addEventListener("click", writeFile); //delete
 }
+//Local Storage which deletes/clears the text entered by user upon clikcing on clear button, can view the Keyvalue in localstorage with Key=area and value as text entered
+area.value = localStorage.getItem('area');
+area.oninput = () => {
+    localStorage.setItem('area', area.value)
+};
+
+// document.querySelector("#FileInput").addEventListener("change", function() {
+//     const reader = new FileReader();
+
+//     reader.addEventListener("load", () => {
+//         console.log(load, reader.result);
+//         localStorage.setItem("this-file", reader.result);
+//     });
+//     console.log("file: ", this.file[0]);
+//     reader.readAsDataURL(this.file[0]);
+// });
+// document.addEventListener("DOMContentLoaded", () => {
+//     const recentImageUrl = localStorage.getItem("this-file");
+//     console.log("recent", recentImageUrl);
+// })
+
+//}
+
+// var butOpenFile = document.getElementById("btn");
+document.getElementById("btn2").addEventListener("click", CreateFile); //Update
+document.getElementById("btn3").addEventListener("click", writeFile); //delete
+// }
